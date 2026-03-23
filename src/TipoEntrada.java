@@ -1,5 +1,3 @@
-package proyectoanalisis;
-
 public enum TipoEntrada {
     ORDENADO("ordenado"),
     INVERSO("inverso"),

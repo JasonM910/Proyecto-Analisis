@@ -1,5 +1,3 @@
-package proyectoanalisis;
-
 public class MetricasOrdenamiento {
     private long asignaciones;
     private long comparaciones;

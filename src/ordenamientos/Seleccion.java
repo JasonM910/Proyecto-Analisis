@@ -1,7 +1,3 @@
-package proyectoanalisis.ordenamientos;
-
-import proyectoanalisis.MetricasOrdenamiento;
-
 public class Seleccion {
     public void ordenar(int[] datos, MetricasOrdenamiento metricas) {
         for (int i = 0; i < datos.length - 1; i++) {
