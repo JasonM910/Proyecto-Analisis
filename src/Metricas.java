@@ -1,4 +1,4 @@
-public class MetricasOrdenamiento {
+public class Metricas {
     private long asignaciones;
     private long comparaciones;
     private double tiempoMilisegundos;

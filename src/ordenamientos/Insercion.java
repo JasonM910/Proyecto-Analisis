@@ -1,5 +1,5 @@
 public class Insercion {
-    public void ordenar(int[] datos, MetricasOrdenamiento metricas) {
+    public void ordenar(int[] datos, Metricas metricas) {
         for (int i = 1; i < datos.length; i++) {
             int clave = datos[i];
             int j = i - 1;

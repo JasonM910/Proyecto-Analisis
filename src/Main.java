@@ -1,6 +1,4 @@
 import java.util.Arrays;
-import java.util.Locale;
-import java.util.Map;
 
 public class Main {
     private static final int[] tamanos = {10, 100, 200, 300, 400, 500, 600, 700, 1000, 10000, 20000, 40000, 80000};
@@ -30,14 +28,12 @@ public class Main {
             System.out.println("---- Tamano " + tamano + " ----");
             primerTamano = false;
 
-            Map<TipoEntrada, int[]> casos = generadorDatos.generarCasos(tamano);
-
             for (TipoEntrada tipoEntrada : TipoEntrada.values()) {
-                int[] datosBase = casos.get(tipoEntrada);
+                int[] datosBase = generadorDatos.generarDatos(tipoEntrada, tamano);
 
                 for (String nombreAlgoritmo : nombresAlgoritmos) {
                     int[] copiaTrabajo = Arrays.copyOf(datosBase, datosBase.length);
-                    MetricasOrdenamiento metricas = new MetricasOrdenamiento();
+                    Metricas metricas = new Metricas();
 
                     if (tamano == 10 && esEntradaAleatoria(tipoEntrada)) {
                         System.out.println("  Entrada:   " + Arrays.toString(copiaTrabajo));
@@ -51,7 +47,7 @@ public class Main {
                     }
                     long tiempoFinNano = System.nanoTime();
 
-                    metricas.establecerTiempoMilisegundos((tiempoFinNano - tiempoInicioNano) / 1_000_000.0);
+                    metricas.establecerTiempoMilisegundos((tiempoFinNano - tiempoInicioNano) / 1000000.0);
                     imprimirResultado(nombreAlgoritmo, tipoEntrada, metricas);
 
                     if (tamano == 10) {
@@ -62,17 +58,13 @@ public class Main {
         }
     }
 
-    private static void imprimirResultado(String nombreAlgoritmo, TipoEntrada tipoEntrada,
-            MetricasOrdenamiento metricas) {
-        String linea = String.format(Locale.US,
-                "%-10s | %-22s | asig=%-12d | comp=%-12d | lineas=%-12d | tiempo(ms)=%8.3f",
-                nombreAlgoritmo,
-                tipoEntrada.obtenerEtiqueta(),
-                metricas.obtenerAsignaciones(),
-                metricas.obtenerComparaciones(),
-                metricas.obtenerLineasEjecutadas(),
-                metricas.obtenerTiempoMilisegundos());
-        System.out.println(linea);
+    private static void imprimirResultado(String nombreAlgoritmo, TipoEntrada tipoEntrada, Metricas metricas) {
+        System.out.println(nombreAlgoritmo
+                + " | " + tipoEntrada.obtenerEtiqueta()
+                + " | asig=" + metricas.obtenerAsignaciones()
+                + " | comp=" + metricas.obtenerComparaciones()
+                + " | lineas=" + metricas.obtenerLineasEjecutadas()
+                + " | tiempo(ms)=" + metricas.obtenerTiempoMilisegundos());
     }
 
     private static boolean esEntradaAleatoria(TipoEntrada tipoEntrada) {

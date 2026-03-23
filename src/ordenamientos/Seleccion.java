@@ -1,5 +1,5 @@
 public class Seleccion {
-    public void ordenar(int[] datos, MetricasOrdenamiento metricas) {
+    public void ordenar(int[] datos, Metricas metricas) {
         for (int i = 0; i < datos.length - 1; i++) {
             int indiceMinimo = i;
             metricas.sumarAsignaciones(1);

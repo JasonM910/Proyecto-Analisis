@@ -1,15 +1,20 @@
-import java.util.EnumMap;
-import java.util.Map;
 import java.util.Random;
 
 public class GeneradorDatos {
-    public Map<TipoEntrada, int[]> generarCasos(int tamano) {
-        Map<TipoEntrada, int[]> casos = new EnumMap<>(TipoEntrada.class);
-        casos.put(TipoEntrada.ORDENADO, construirOrdenado(tamano));
-        casos.put(TipoEntrada.INVERSO, construirInverso(tamano));
-        casos.put(TipoEntrada.ALEATORIO, construirAleatorioSinRepetidos(tamano));
-        casos.put(TipoEntrada.ALEATORIO_CON_REPETIDOS, construirAleatorioConRepetidos(tamano));
-        return casos;
+    public int[] generarDatos(TipoEntrada tipoEntrada, int tamano) {
+        if (tipoEntrada == TipoEntrada.ORDENADO) {
+            return construirOrdenado(tamano);
+        }
+        if (tipoEntrada == TipoEntrada.INVERSO) {
+            return construirInverso(tamano);
+        }
+        if (tipoEntrada == TipoEntrada.ALEATORIO) {
+            return construirAleatorioSinRepetidos(tamano);
+        }
+        if (tipoEntrada == TipoEntrada.ALEATORIO_CON_REPETIDOS) {
+            return construirAleatorioConRepetidos(tamano);
+        }
+        throw new IllegalStateException("Tipo de entrada no soportado: " + tipoEntrada);
     }
 
     private int[] construirOrdenado(int tamano) {
