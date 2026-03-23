@@ -1,6 +1,8 @@
 import java.util.Random;
 
+// Encargado de construir arreglos de prueba segun el tipo de entrada
 public class GeneradorDatos {
+    // Metodo principal para generar la entrada pedida
     public int[] generarDatos(TipoEntrada tipoEntrada, int tamano) {
         if (tipoEntrada == TipoEntrada.ORDENADO) {
             return construirOrdenado(tamano);
@@ -17,6 +19,7 @@ public class GeneradorDatos {
         throw new IllegalStateException("Tipo de entrada no soportado: " + tipoEntrada);
     }
 
+    // 1, 2, 3, ..., n
     private int[] construirOrdenado(int tamano) {
         int[] datos = new int[tamano];
         for (int i = 0; i < tamano; i++) {
@@ -25,6 +28,7 @@ public class GeneradorDatos {
         return datos;
     }
 
+    // n, n-1, n-2, ..., 1
     private int[] construirInverso(int tamano) {
         int[] datos = new int[tamano];
         for (int i = 0; i < tamano; i++) {
@@ -33,6 +37,7 @@ public class GeneradorDatos {
         return datos;
     }
 
+    // Arreglo sin repetidos
     private int[] construirAleatorioSinRepetidos(int tamano) {
         int[] datos = construirOrdenado(tamano);
         Random aleatorio = new Random();
@@ -46,6 +51,7 @@ public class GeneradorDatos {
         return datos;
     }
 
+    // Parte de aleatorio sin repetidos y luego fuerza un 10% de repetidos
     private int[] construirAleatorioConRepetidos(int tamano) {
         int[] datos = construirAleatorioSinRepetidos(tamano);
         if (tamano == 0) {

@@ -5,6 +5,7 @@ import ordenamientos.Seleccion;
 import java.util.Arrays;
 
 public class Main {
+    // Tamanos que pide el enunciado para las pruebas.
     private static final int[] tamanos = {10, 100, 200, 300, 400, 500, 600, 700, 1000, 10000, 20000, 40000, 80000};
 
     public static void main(String[] args) {
@@ -20,6 +21,7 @@ public class Main {
         ejecutarExperimentos(algoritmoSeleccion, algoritmoInsercion, generadorDatos);
     }
 
+    // Recorre cada tamano y cada tipo de entrada para medir ambos algoritmos
     private static void ejecutarExperimentos(Seleccion algoritmoSeleccion, Insercion algoritmoInsercion,
             GeneradorDatos generadorDatos) {
         String[] nombresAlgoritmos = {"Seleccion", "Insercion"};
@@ -33,9 +35,11 @@ public class Main {
             primerTamano = false;
 
             for (TipoEntrada tipoEntrada : TipoEntrada.values()) {
+                // Se generan datos una sola vez por tipo para que ambos algoritmos usen la misma entrada
                 int[] datosBase = generadorDatos.generarDatos(tipoEntrada, tamano);
 
                 for (String nombreAlgoritmo : nombresAlgoritmos) {
+                    // Cada algoritmo trabaja sobre una copia para no alterar el arreglo base
                     int[] copiaTrabajo = Arrays.copyOf(datosBase, datosBase.length);
                     Metricas metricas = new Metricas();
 
@@ -43,6 +47,7 @@ public class Main {
                         System.out.println("  Entrada:   " + Arrays.toString(copiaTrabajo));
                     }
 
+                    // Medicion de tiempo del algoritmo
                     long tiempoInicioNano = System.nanoTime();
                     if (nombreAlgoritmo.equals("Seleccion")) {
                         algoritmoSeleccion.ordenar(copiaTrabajo, metricas);
@@ -62,6 +67,7 @@ public class Main {
         }
     }
 
+    // Imprime el resumen de metricas
     private static void imprimirResultado(String nombreAlgoritmo, TipoEntrada tipoEntrada, Metricas metricas) {
         System.out.println(nombreAlgoritmo
                 + " | " + tipoEntrada.obtenerEtiqueta()
@@ -71,6 +77,7 @@ public class Main {
                 + " | tiempo(ms)=" + metricas.obtenerTiempoMilisegundos());
     }
 
+    // Solo estos dos tipos se consideran entradas revueltas para mostrar el arreglo
     private static boolean esEntradaAleatoria(TipoEntrada tipoEntrada) {
         return tipoEntrada == TipoEntrada.ALEATORIO || tipoEntrada == TipoEntrada.ALEATORIO_CON_REPETIDOS;
     }
