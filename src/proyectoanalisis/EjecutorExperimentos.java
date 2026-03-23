@@ -3,10 +3,11 @@ package proyectoanalisis;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.Map;
+import proyectoanalisis.ordenamientos.Insercion;
+import proyectoanalisis.ordenamientos.Seleccion;
 
 public class EjecutorExperimentos {
-    private static final int[] tamanos = {10, 100, 200, 300, 400, 500, 600, 700, 1000, 10000, 20000, 40000,
-            80000};
+    private static final int[] tamanos = {10, 100, 200, 300, 400, 500, 600, 700, 1000, 10000, 20000, 40000, 80000};
 
     private final GeneradorDatos generadorDatos;
 
@@ -14,7 +15,7 @@ public class EjecutorExperimentos {
         this.generadorDatos = new GeneradorDatos();
     }
 
-    public void ejecutar(OrdenamientoSeleccion algoritmoSeleccion, OrdenamientoInsercion algoritmoInsercion) {
+    public void ejecutar(Seleccion algoritmoSeleccion, Insercion algoritmoInsercion) {
         String[] nombresAlgoritmos = {"Seleccion", "Insercion"};
         boolean primerTamano = true;
 

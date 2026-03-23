@@ -1,13 +1,8 @@
-package proyectoanalisis;
+package proyectoanalisis.ordenamientos;
 
-public class OrdenamientoInsercion {
+import proyectoanalisis.MetricasOrdenamiento;
 
-    private static final int CANTIDAD_LINEAS_CODIGO = 20;
-
-    public int obtenerCantidadLineasCodigo() {
-        return CANTIDAD_LINEAS_CODIGO;
-    }
-
+public class Insercion {
     public void ordenar(int[] datos, MetricasOrdenamiento metricas) {
         for (int i = 1; i < datos.length; i++) {
             int clave = datos[i];

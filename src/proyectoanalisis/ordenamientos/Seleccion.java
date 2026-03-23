@@ -1,13 +1,8 @@
-package proyectoanalisis;
+package proyectoanalisis.ordenamientos;
 
-public class OrdenamientoSeleccion {
+import proyectoanalisis.MetricasOrdenamiento;
 
-    private static final int CANTIDAD_LINEAS_CODIGO = 18;
-
-    public int obtenerCantidadLineasCodigo() {
-        return CANTIDAD_LINEAS_CODIGO;
-    }
-
+public class Seleccion {
     public void ordenar(int[] datos, MetricasOrdenamiento metricas) {
         for (int i = 0; i < datos.length - 1; i++) {
             int indiceMinimo = i;
