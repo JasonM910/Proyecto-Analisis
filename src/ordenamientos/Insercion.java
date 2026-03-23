@@ -1,3 +1,5 @@
+package ordenamientos;
+
 public class Insercion {
     public void ordenar(int[] datos, Metricas metricas) {
         for (int i = 1; i < datos.length; i++) {

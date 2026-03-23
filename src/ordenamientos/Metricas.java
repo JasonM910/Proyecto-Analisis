@@ -1,3 +1,5 @@
+package ordenamientos;
+
 public class Metricas {
     private long asignaciones;
     private long comparaciones;

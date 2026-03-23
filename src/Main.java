@@ -1,3 +1,7 @@
+import ordenamientos.Insercion;
+import ordenamientos.Metricas;
+import ordenamientos.Seleccion;
+
 import java.util.Arrays;
 
 public class Main {
