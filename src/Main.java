@@ -3,6 +3,8 @@ import ordenamientos.Metricas;
 import ordenamientos.Seleccion;
 import ordenamientos.QuickSort;
 import ordenamientos.ShellSort;
+import ordenamientos.CountingSort;
+import ordenamientos.RadixSort;
 
 import java.util.Arrays;
 
@@ -15,20 +17,23 @@ public class Main {
         Insercion algoritmoInsercion = new Insercion();
         QuickSort algoritmoQuickSort = new QuickSort();
         ShellSort algoritmoShellSort = new ShellSort();
+        CountingSort algoritmoCounting = new CountingSort();
+        RadixSort algoritmoRadix = new RadixSort();
         GeneradorDatos generadorDatos = new GeneradorDatos();
+        
 
         System.out.println("=== Proyecto Analisis de Algoritmos ===");
-        System.out.println("Algoritmos implementados: Seleccion, Insercion, QuickSort, ShellSort");
+        System.out.println("Algoritmos implementados: Seleccion, Insercion, QuickSort, ShellSort, CountingSort, RadixSort");
         System.out.println("Tamanos de prueba: 10, 100, 200, 300, 400, 500, 600, 700, 1000, 10000, 20000, 40000, 80000");
         System.out.println();
 
-        ejecutarExperimentos(algoritmoSeleccion, algoritmoInsercion, algoritmoQuickSort, algoritmoShellSort, generadorDatos);
+        ejecutarExperimentos(algoritmoSeleccion, algoritmoInsercion, algoritmoQuickSort, algoritmoShellSort, algoritmoCounting, algoritmoRadix, generadorDatos);
     }
 
     // Recorre cada tamano y cada tipo de entrada para medir ambos algoritmos
     private static void ejecutarExperimentos(Seleccion algoritmoSeleccion, Insercion algoritmoInsercion,
-                                             QuickSort algoritmoQuickSort, ShellSort algoritmoShellSort, GeneradorDatos generadorDatos) {
-        String[] nombresAlgoritmos = {"Seleccion", "Insercion", "QuickSort", "ShellSort"};
+                                             QuickSort algoritmoQuickSort, ShellSort algoritmoShellSort, CountingSort algoritmoCounting, RadixSort algoritmoRadix, GeneradorDatos generadorDatos) {
+        String[] nombresAlgoritmos = {"Seleccion", "Insercion", "QuickSort", "ShellSort", "CountingSort", "RadixSort"};
         boolean primerTamano = true;
 
         for (int tamano : tamanos) {
@@ -62,6 +67,10 @@ public class Main {
                         algoritmoQuickSort.ordenar(copiaTrabajo, metricas);
                     } else if (nombreAlgoritmo.equals("ShellSort")) {
                         algoritmoShellSort.ordenar(copiaTrabajo, metricas);
+                    } else if (nombreAlgoritmo.equals("CountingSort")) {
+                        algoritmoCounting.ordenar(copiaTrabajo, metricas);
+                    } else if (nombreAlgoritmo.equals("RadixSort")) {
+                        algoritmoRadix.ordenar(copiaTrabajo, metricas);
                     }
 
                     long tiempoFinNano = System.nanoTime();
