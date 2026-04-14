@@ -1,6 +1,8 @@
 import ordenamientos.Insercion;
 import ordenamientos.Metricas;
 import ordenamientos.Seleccion;
+import ordenamientos.QuickSort;
+import ordenamientos.ShellSort;
 
 import java.util.Arrays;
 
@@ -11,20 +13,22 @@ public class Main {
     public static void main(String[] args) {
         Seleccion algoritmoSeleccion = new Seleccion();
         Insercion algoritmoInsercion = new Insercion();
+        QuickSort algoritmoQuickSort = new QuickSort();
+        ShellSort algoritmoShellSort = new ShellSort();
         GeneradorDatos generadorDatos = new GeneradorDatos();
 
         System.out.println("=== Proyecto Analisis de Algoritmos ===");
-        System.out.println("Algoritmos implementados: Seleccion, Insercion");
+        System.out.println("Algoritmos implementados: Seleccion, Insercion, QuickSort, ShellSort");
         System.out.println("Tamanos de prueba: 10, 100, 200, 300, 400, 500, 600, 700, 1000, 10000, 20000, 40000, 80000");
         System.out.println();
 
-        ejecutarExperimentos(algoritmoSeleccion, algoritmoInsercion, generadorDatos);
+        ejecutarExperimentos(algoritmoSeleccion, algoritmoInsercion, algoritmoQuickSort, algoritmoShellSort, generadorDatos);
     }
 
     // Recorre cada tamano y cada tipo de entrada para medir ambos algoritmos
     private static void ejecutarExperimentos(Seleccion algoritmoSeleccion, Insercion algoritmoInsercion,
-            GeneradorDatos generadorDatos) {
-        String[] nombresAlgoritmos = {"Seleccion", "Insercion"};
+                                             QuickSort algoritmoQuickSort, ShellSort algoritmoShellSort, GeneradorDatos generadorDatos) {
+        String[] nombresAlgoritmos = {"Seleccion", "Insercion", "QuickSort", "ShellSort"};
         boolean primerTamano = true;
 
         for (int tamano : tamanos) {
@@ -35,7 +39,7 @@ public class Main {
             primerTamano = false;
 
             for (TipoEntrada tipoEntrada : TipoEntrada.values()) {
-                // Se generan datos una sola vez por tipo para que ambos algoritmos usen la misma entrada
+                // Se generan datos una sola vez por tipo para que todos los algoritmos usen la misma entrada
                 int[] datosBase = generadorDatos.generarDatos(tipoEntrada, tamano);
 
                 for (String nombreAlgoritmo : nombresAlgoritmos) {
@@ -49,11 +53,17 @@ public class Main {
 
                     // Medicion de tiempo del algoritmo
                     long tiempoInicioNano = System.nanoTime();
+
                     if (nombreAlgoritmo.equals("Seleccion")) {
                         algoritmoSeleccion.ordenar(copiaTrabajo, metricas);
                     } else if (nombreAlgoritmo.equals("Insercion")) {
                         algoritmoInsercion.ordenar(copiaTrabajo, metricas);
+                    } else if (nombreAlgoritmo.equals("QuickSort")) {
+                        algoritmoQuickSort.ordenar(copiaTrabajo, metricas);
+                    } else if (nombreAlgoritmo.equals("ShellSort")) {
+                        algoritmoShellSort.ordenar(copiaTrabajo, metricas);
                     }
+
                     long tiempoFinNano = System.nanoTime();
 
                     metricas.establecerTiempoMilisegundos((tiempoFinNano - tiempoInicioNano) / 1000000.0);
