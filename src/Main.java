@@ -8,17 +8,28 @@ import ordenamientos.RadixSort;
 
 import java.util.Arrays;
 
+/**
+ * Punto de entrada del proyecto.
+ *
+ * <p>Coordina la generacion de datos, la ejecucion de cada algoritmo de ordenamiento y la
+ * impresion de metricas para cada tamano y tipo de entrada.</p>
+ */
 public class Main {
-    // Tamanos que pide el enunciado para las pruebas.
-    private static final int[] tamanos = {10, 100, 200, 300, 400, 500, 600, 700, 1000, 10000, 20000, 40000, 80000};
+    /** Tamanos que se usan para las pruebas experimentales. */
+    private static final int[] tamanosPrueba = {10, 100, 200, 300, 400, 500, 600, 700, 1000, 10000, 20000, 40000, 80000};
 
+    /**
+     * Inicia la ejecucion del programa.
+     *
+     * @param args argumentos de linea de comandos (no utilizados)
+     */
     public static void main(String[] args) {
         Seleccion algoritmoSeleccion = new Seleccion();
         Insercion algoritmoInsercion = new Insercion();
         QuickSort algoritmoQuickSort = new QuickSort();
         ShellSort algoritmoShellSort = new ShellSort();
-        CountingSort algoritmoCounting = new CountingSort();
-        RadixSort algoritmoRadix = new RadixSort();
+        CountingSort algoritmoCountingSort = new CountingSort();
+        RadixSort algoritmoRadixSort = new RadixSort();
         GeneradorDatos generadorDatos = new GeneradorDatos();
         
         System.out.println("=== Proyecto Analisis de Algoritmos ===");
@@ -26,21 +37,41 @@ public class Main {
         System.out.println("Tamanos de prueba: 10, 100, 200, 300, 400, 500, 600, 700, 1000, 10000, 20000, 40000, 80000");
         System.out.println();
 
-        ejecutarExperimentos(algoritmoSeleccion, algoritmoInsercion, algoritmoQuickSort, algoritmoShellSort, algoritmoCounting, algoritmoRadix, generadorDatos);
+        ejecutarExperimentos(
+                algoritmoSeleccion,
+                algoritmoInsercion,
+                algoritmoQuickSort,
+                algoritmoShellSort,
+                algoritmoCountingSort,
+                algoritmoRadixSort,
+                generadorDatos
+        );
     }
 
-    // Recorre cada tamano y cada tipo de entrada para medir ambos algoritmos
+    /**
+     * Ejecuta todos los algoritmos para cada tamano y tipo de entrada.
+     *
+     * @param algoritmoSeleccion instancia de ordenamiento por seleccion
+     * @param algoritmoInsercion instancia de ordenamiento por insercion
+     * @param algoritmoQuickSort instancia de QuickSort
+     * @param algoritmoShellSort instancia de ShellSort
+     * @param algoritmoCountingSort instancia de CountingSort
+     * @param algoritmoRadixSort instancia de RadixSort
+     * @param generadorDatos generador de arreglos de entrada
+     */
     private static void ejecutarExperimentos(Seleccion algoritmoSeleccion, Insercion algoritmoInsercion,
-                                             QuickSort algoritmoQuickSort, ShellSort algoritmoShellSort, CountingSort algoritmoCounting, RadixSort algoritmoRadix, GeneradorDatos generadorDatos) {
+                                             QuickSort algoritmoQuickSort, ShellSort algoritmoShellSort,
+                                             CountingSort algoritmoCountingSort, RadixSort algoritmoRadixSort,
+                                             GeneradorDatos generadorDatos) {
         String[] nombresAlgoritmos = {"Seleccion", "Insercion", "QuickSort", "ShellSort", "CountingSort", "RadixSort"};
-        boolean primerTamano = true;
+        boolean esPrimerTamano = true;
 
-        for (int tamano : tamanos) {
-            if (!primerTamano) {
+        for (int tamano : tamanosPrueba) {
+            if (!esPrimerTamano) {
                 System.out.println();
             }
             System.out.println("---- Tamano " + tamano + " ----");
-            primerTamano = false;
+            esPrimerTamano = false;
 
             for (TipoEntrada tipoEntrada : TipoEntrada.values()) {
                 // Se generan datos una sola vez por tipo para que todos los algoritmos usen la misma entrada
@@ -67,9 +98,9 @@ public class Main {
                     } else if (nombreAlgoritmo.equals("ShellSort")) {
                         algoritmoShellSort.ordenar(copiaTrabajo, metricas);
                     } else if (nombreAlgoritmo.equals("CountingSort")) {
-                        algoritmoCounting.ordenar(copiaTrabajo, metricas);
+                        algoritmoCountingSort.ordenar(copiaTrabajo, metricas);
                     } else if (nombreAlgoritmo.equals("RadixSort")) {
-                        algoritmoRadix.ordenar(copiaTrabajo, metricas);
+                        algoritmoRadixSort.ordenar(copiaTrabajo, metricas);
                     }
 
                     long tiempoFinNano = System.nanoTime();
@@ -85,7 +116,13 @@ public class Main {
         }
     }
 
-    // Imprime el resumen de metricas
+    /**
+     * Imprime el resultado resumido de un algoritmo para un tipo de entrada.
+     *
+     * @param nombreAlgoritmo nombre del algoritmo ejecutado
+     * @param tipoEntrada tipo de entrada procesada
+     * @param metricas metricas medidas durante la ejecucion
+     */
     private static void imprimirResultado(String nombreAlgoritmo, TipoEntrada tipoEntrada, Metricas metricas) {
         System.out.println(nombreAlgoritmo
                 + " | " + tipoEntrada.obtenerEtiqueta()
@@ -95,7 +132,12 @@ public class Main {
                 + " | tiempo(ms)=" + metricas.obtenerTiempoMilisegundos());
     }
 
-    // Solo estos dos tipos se consideran entradas revueltas para mostrar el arreglo
+    /**
+     * Indica si el tipo de entrada debe mostrarse como arreglo original en consola.
+     *
+     * @param tipoEntrada tipo de entrada evaluado
+     * @return {@code true} si la entrada es aleatoria; {@code false} en caso contrario
+     */
     private static boolean esEntradaAleatoria(TipoEntrada tipoEntrada) {
         return tipoEntrada == TipoEntrada.ALEATORIO || tipoEntrada == TipoEntrada.ALEATORIO_CON_REPETIDOS;
     }

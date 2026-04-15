@@ -1,8 +1,19 @@
 import java.util.Random;
 
-// Encargado de construir arreglos de prueba segun el tipo de entrada
+/**
+ * Construye arreglos de prueba segun el tipo de entrada solicitado.
+ *
+ * <p>Esta clase centraliza la logica de generacion para garantizar que todos los algoritmos
+ * se ejecuten sobre entradas comparables.</p>
+ */
 public class GeneradorDatos {
-    // Metodo principal para generar la entrada pedida
+    /**
+     * Genera un arreglo segun el tipo de entrada y el tamano solicitados.
+     *
+     * @param tipoEntrada tipo de distribucion de datos que se desea construir
+     * @param tamano cantidad de elementos del arreglo
+     * @return arreglo de enteros generado segun el tipo indicado
+     */
     public int[] generarDatos(TipoEntrada tipoEntrada, int tamano) {
         if (tipoEntrada == TipoEntrada.ORDENADO) {
             return construirOrdenado(tamano);
@@ -19,7 +30,12 @@ public class GeneradorDatos {
         throw new IllegalStateException("Tipo de entrada no soportado: " + tipoEntrada);
     }
 
-    // 1, 2, 3, ..., n
+    /**
+     * Crea una secuencia ordenada ascendente: 1, 2, 3, ..., n.
+     *
+     * @param tamano cantidad de elementos
+     * @return arreglo ordenado de forma ascendente
+     */
     private int[] construirOrdenado(int tamano) {
         int[] datos = new int[tamano];
         for (int i = 0; i < tamano; i++) {
@@ -28,7 +44,12 @@ public class GeneradorDatos {
         return datos;
     }
 
-    // n, n-1, n-2, ..., 1
+    /**
+     * Crea una secuencia ordenada descendente: n, n-1, ..., 1.
+     *
+     * @param tamano cantidad de elementos
+     * @return arreglo ordenado de forma descendente
+     */
     private int[] construirInverso(int tamano) {
         int[] datos = new int[tamano];
         for (int i = 0; i < tamano; i++) {
@@ -37,13 +58,18 @@ public class GeneradorDatos {
         return datos;
     }
 
-    // Arreglo sin repetidos
+    /**
+     * Genera un arreglo aleatorio sin repetidos usando mezcla Fisher-Yates.
+     *
+     * @param tamano cantidad de elementos
+     * @return arreglo permutado sin elementos repetidos
+     */
     private int[] construirAleatorioSinRepetidos(int tamano) {
         int[] datos = construirOrdenado(tamano);
-        Random aleatorio = new Random();
+        Random generadorAleatorio = new Random();
 
         for (int i = datos.length - 1; i > 0; i--) {
-            int indiceIntercambio = aleatorio.nextInt(i + 1);
+            int indiceIntercambio = generadorAleatorio.nextInt(i + 1);
             int temporal = datos[i];
             datos[i] = datos[indiceIntercambio];
             datos[indiceIntercambio] = temporal;
@@ -51,21 +77,26 @@ public class GeneradorDatos {
         return datos;
     }
 
-    // Parte de aleatorio sin repetidos y luego fuerza un 10% de repetidos
+    /**
+     * Genera un arreglo aleatorio e introduce repetidos en alrededor del 10% de posiciones.
+     *
+     * @param tamano cantidad de elementos
+     * @return arreglo aleatorio con algunos valores repetidos
+     */
     private int[] construirAleatorioConRepetidos(int tamano) {
         int[] datos = construirAleatorioSinRepetidos(tamano);
         if (tamano == 0) {
             return datos;
         }
 
-        Random aleatorio = new Random();
+        Random generadorAleatorio = new Random();
         int cantidadCambiosRepetidos = Math.max(1, tamano / 10);
 
         for (int i = 0; i < cantidadCambiosRepetidos; i++) {
-            int indiceDestino = aleatorio.nextInt(tamano);
-            int indiceOrigen = aleatorio.nextInt(tamano);
+            int indiceDestino = generadorAleatorio.nextInt(tamano);
+            int indiceOrigen = generadorAleatorio.nextInt(tamano);
             while (indiceOrigen == indiceDestino) {
-                indiceOrigen = aleatorio.nextInt(tamano);
+                indiceOrigen = generadorAleatorio.nextInt(tamano);
             }
             datos[indiceDestino] = datos[indiceOrigen];
         }

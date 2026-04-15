@@ -1,8 +1,15 @@
 package ordenamientos;
 
-//Implementación del algoritmo ShellSort
+/**
+ * Implementa el algoritmo ShellSort usando saltos decrecientes.
+ */
 public class ShellSort {
-    // Ordena el arreglo usando saltos decrecientes
+    /**
+     * Ordena un arreglo de enteros en orden ascendente mediante inserciones por salto.
+     *
+     * @param datos arreglo de enteros a ordenar
+     * @param metricas acumulador de asignaciones y comparaciones
+     */
     public void ordenar(int[] datos, Metricas metricas) {
         int tamano = datos.length;
         metricas.sumarAsignaciones(1);

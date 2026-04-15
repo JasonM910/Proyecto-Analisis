@@ -1,4 +1,6 @@
-// Tipos de entrada que se prueban en los algoritmos
+/**
+ * Enum con los tipos de entrada usados en las pruebas de ordenamiento.
+ */
 public enum TipoEntrada {
     ORDENADO("ordenado"),
     INVERSO("inverso"),
@@ -7,12 +9,20 @@ public enum TipoEntrada {
 
     private final String etiqueta;
 
-    // Guarda la etiqueta que se imprime en consola
+    /**
+     * Crea un tipo de entrada con su etiqueta de impresion.
+     *
+     * @param etiqueta texto que se muestra en consola para este tipo
+     */
     TipoEntrada(String etiqueta) {
         this.etiqueta = etiqueta;
     }
 
-    // Devuelve el texto del tipo de entrada
+    /**
+     * Obtiene la etiqueta asociada al tipo de entrada.
+     *
+     * @return etiqueta para reportes en consola
+     */
     public String obtenerEtiqueta() {
         return etiqueta;
     }

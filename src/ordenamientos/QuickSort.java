@@ -1,8 +1,15 @@
 package ordenamientos;
 
-// Implementacion del algoritmo QuickSort
+/**
+ * Implementa el algoritmo QuickSort con pivote central.
+ */
 public class QuickSort {
-    // Metodo principal que inicia el ordenamiento
+    /**
+     * Ordena un arreglo de enteros en orden ascendente.
+     *
+     * @param datos arreglo de enteros a ordenar
+     * @param metricas acumulador de asignaciones y comparaciones
+     */
     public void ordenar(int[] datos, Metricas metricas) {
         if (datos == null || datos.length <= 1) {
             return;
@@ -10,7 +17,14 @@ public class QuickSort {
         quickSort(datos, 0, datos.length - 1, metricas);
     }
 
-    // Ordena el arreglo usando particion con pivote central
+    /**
+     * Aplica QuickSort recursivo sobre un segmento del arreglo.
+     *
+     * @param datos arreglo con los valores a ordenar
+     * @param inicio indice inicial del segmento
+     * @param fin indice final del segmento
+     * @param metricas acumulador de asignaciones y comparaciones
+     */
     private void quickSort(int[] datos, int inicio, int fin, Metricas metricas) {
         metricas.sumarComparaciones(1);
         if (inicio >= fin) {
@@ -57,7 +71,14 @@ public class QuickSort {
         }
     }
 
-    // Intercambia dos elementos del arreglo
+    /**
+     * Intercambia dos posiciones del arreglo si son diferentes.
+     *
+     * @param datos arreglo objetivo
+     * @param indice1 primer indice
+     * @param indice2 segundo indice
+     * @param metricas acumulador de asignaciones y comparaciones
+     */
     private void intercambiar(int[] datos, int indice1, int indice2, Metricas metricas) {
         metricas.sumarComparaciones(1);
         if (indice1 != indice2) {

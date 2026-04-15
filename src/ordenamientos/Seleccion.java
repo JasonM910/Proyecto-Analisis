@@ -1,10 +1,16 @@
 package ordenamientos;
 
-// Implementacion del algoritmo de ordenamiento por seleccion
+/**
+ * Implementa el algoritmo de ordenamiento por seleccion.
+ */
 public class Seleccion {
-    // Ordena el arreglo y actualiza contadores de metricas
+    /**
+     * Ordena el arreglo en orden ascendente y actualiza las metricas de operacion.
+     *
+     * @param datos arreglo de enteros a ordenar
+     * @param metricas acumulador de asignaciones y comparaciones
+     */
     public void ordenar(int[] datos, Metricas metricas) {
-        // Recorre cada posicion y coloca el minimo que encuentra
         for (int i = 0; i < datos.length - 1; i++) {
             int indiceMinimo = i;
             metricas.sumarAsignaciones(1);
@@ -17,7 +23,6 @@ public class Seleccion {
                 }
             }
 
-            // Si encontro un minimo distinto, hace el intercambio
             metricas.sumarComparaciones(1);
             if (indiceMinimo != i) {
                 int temporal = datos[i];
