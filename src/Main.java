@@ -21,7 +21,6 @@ public class Main {
         RadixSort algoritmoRadix = new RadixSort();
         GeneradorDatos generadorDatos = new GeneradorDatos();
         
-
         System.out.println("=== Proyecto Analisis de Algoritmos ===");
         System.out.println("Algoritmos implementados: Seleccion, Insercion, QuickSort, ShellSort, CountingSort, RadixSort");
         System.out.println("Tamanos de prueba: 10, 100, 200, 300, 400, 500, 600, 700, 1000, 10000, 20000, 40000, 80000");
